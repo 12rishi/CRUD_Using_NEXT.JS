@@ -46,9 +46,8 @@ const Form = () => {
               cols="30"
               rows="10"
               className="mb-10 h-40 w-full resize-none rounded-md border border-slate-300 p-5 font-semibold text-gray-300"
-            >
-              Message
-            </textarea>
+              defaultValue="Message"
+            ></textarea>
           </div>
           <div className="text-center">
             <a className="cursor-pointer rounded-lg bg-blue-700 px-8 py-5 text-sm font-semibold text-white">
