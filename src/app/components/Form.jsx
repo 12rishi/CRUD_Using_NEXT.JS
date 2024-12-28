@@ -61,3 +61,4 @@ const Form = () => {
 };
 
 export default Form;
+//DATABASE_URL="postgresql://postgres.ojpmbntxzeuruezlhmgm:[YOUR-PASSWORD]@aws-0-ap-south-1.pooler.supabase.com:6543/postgres"
