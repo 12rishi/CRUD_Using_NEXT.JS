@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "db:migration": "drizzle-kit generate --config=drizzle.config.js",
+    "db:migrate": "node -r esbuild-register ./migrate",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
