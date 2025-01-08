@@ -3,8 +3,8 @@ import { recipes } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 export const GET = async (request, urlParams) => {
-  const { id } = urlParams.params;
-  console.log("id is", id);
+  const { id } = await urlParams.params;
+
   if (!id) {
     return Response.json(
       {
@@ -45,7 +45,7 @@ export const GET = async (request, urlParams) => {
   }
 };
 export const DELETE = async (request, urlParams) => {
-  const { id } = urlParams.params;
+  const { id } = await urlParams.params;
 
   try {
     if (!id) {
@@ -75,8 +75,9 @@ export const DELETE = async (request, urlParams) => {
 };
 export const PATCH = async (request, urlParams) => {
   const data = await request.json();
-  console.log("data is", data);
-  const { id } = urlParams.params;
+
+  const { id } = await urlParams.params;
+
   try {
     if (!data || !id) {
       return Response.json(
@@ -86,7 +87,7 @@ export const PATCH = async (request, urlParams) => {
         { status: 400 }
       );
     }
-    await db.update(recipes).set(data);
+    await db.update(recipes).set(data).where(eq(recipes?.id, id));
     return Response.json(
       {
         message: "successfully updated the data",

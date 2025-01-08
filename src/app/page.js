@@ -1,9 +1,7 @@
 import Card from "./components/Card";
 const fetchData = async () => {
   const fetchedData = await fetch("http://localhost:3000/api/recipe", {
-    next: {
-      revalidate: 60,
-    },
+    cache: "no-cache",
   });
   if (!fetchedData.ok) {
     throw new Error("data cannot be fetched");

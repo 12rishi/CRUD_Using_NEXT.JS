@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DeleteButton from "./component/Delete";
 
 const Singlepage = async ({ params }) => {
   let singleRecipeData;
@@ -8,9 +9,7 @@ const Singlepage = async ({ params }) => {
     const fetchSingleRecipe = await fetch(
       `http://localhost:3000/api/recipe/${id}`,
       {
-        next: {
-          revalidate: 20,
-        },
+        cache: "no-cache",
       }
     );
 
@@ -19,10 +18,10 @@ const Singlepage = async ({ params }) => {
     }
 
     const data = await fetchSingleRecipe.json(); // Await the response JSON parsing
-    console.log(data);
+
     singleRecipeData = data.data[0];
   } catch (error) {
-    console.error(error?.message);
+    alert(error?.message);
   }
 
   return (
@@ -39,17 +38,13 @@ const Singlepage = async ({ params }) => {
             </div>
             <div className="flex -mx-2 mb-4">
               <div className="w-1/2 px-2">
-                <Link href="/1/edit">
+                <Link href={`/${id}/edit`}>
                   <button className="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700">
                     Edit
                   </button>
                 </Link>
               </div>
-              <div className="w-1/2 px-2">
-                <button className="w-full bg-red-600 dark:bg-gray-700 text-gray-800 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-300 dark:hover:bg-gray-600">
-                  Delete
-                </button>
-              </div>
+              <DeleteButton recipeId={id} />
             </div>
           </div>
           <div className="md:flex-1 px-4">

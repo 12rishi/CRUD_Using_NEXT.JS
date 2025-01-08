@@ -32,7 +32,6 @@ export const POST = async (request) => {
   const data = await request.json();
   try {
     if (data) {
-      console.log(data.name);
       const recipeData = await db.insert(recipes).values(data);
       return Response.json(
         {
